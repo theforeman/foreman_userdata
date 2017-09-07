@@ -39,6 +39,14 @@ rm -rf /var/lib/cloud/*
 /usr/bin/cloud-init -d init
 ```
 
+## Development
+
+To test this plugin manually during development, you can request a template for a specific host by spoofing the host's IP address via a request header.
+
+```
+curl -D - -H 'X-FORWARDED-FOR: 192.168.1.1' http://localhost:3000/userdata/user-data
+```
+
 ## Copyright
 
 Copyright (c) 2016 Timo Goebel
