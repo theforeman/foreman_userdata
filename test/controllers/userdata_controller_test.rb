@@ -20,10 +20,13 @@ class UserdataControllerTest < ActionController::TestCase
     assert_equal content, @response.body
   end
 
-  test 'should get empty metadata' do
+  test 'should get metadata of a host' do
     @request.env['REMOTE_ADDR'] = host.ip
     get :metadata
     assert_response :success
-    assert_empty @response.body
+    response = @response.body
+    parsed = YAML.load(response)
+    assert_equal host.mac, parsed['mac']
+    assert_equal host.hostname, parsed['hostname']
   end
 end

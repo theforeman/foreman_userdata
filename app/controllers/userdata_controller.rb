@@ -22,7 +22,14 @@ class UserdataController < ApplicationController
   end
 
   def metadata
-    render :plain => ''
+    data = {
+      :'instance-id' => "i-#{Digest::SHA1.hexdigest(@host.id.to_s)[0..17]}",
+      :hostname => @host.name,
+      :mac => @host.mac,
+      :'local-ipv4' => @host.ip,
+      :'local-hostname' => @host.name
+    }
+    render :plain => data.map {|key, value| "#{key}: #{value}"}.join("\n")
   end
 
   private
