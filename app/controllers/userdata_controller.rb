@@ -13,6 +13,7 @@ class UserdataController < ApplicationController
     skip_before_action f
   end
 
+  before_action :set_admin_user
   before_action :skip_secure_headers
   before_action :find_host
 
