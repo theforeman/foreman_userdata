@@ -26,5 +26,9 @@ Performance/FixedSize:
   Exclude:
     - 'test/**/*'
 
+Metrics/BlockLength:
+  Exclude:
+    - 'test/**/*'
+
 Metrics/LineLength:
-  Max: 100
+  Max: 120
