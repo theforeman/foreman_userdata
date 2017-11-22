@@ -2,14 +2,14 @@ require 'test_plugin_helper'
 
 class UserdataControllerTest < ActionController::TestCase
   context '#user-data' do
-    let(:organization) { FactoryGirl.create(:organization) }
-    let(:tax_location) { FactoryGirl.create(:location) }
+    let(:organization) { FactoryBot.create(:organization) }
+    let(:tax_location) { FactoryBot.create(:location) }
     let(:user_data_content) { 'template content user_data' }
     let(:cloud_init_content) { 'template content cloud-init' }
-    let(:user_data_template_kind) { FactoryGirl.create(:template_kind, :name => 'user_data') }
-    let(:cloud_init_template_kind) { FactoryGirl.create(:template_kind, :name => 'cloud-init') }
+    let(:user_data_template_kind) { FactoryBot.create(:template_kind, :name => 'user_data') }
+    let(:cloud_init_template_kind) { FactoryBot.create(:template_kind, :name => 'cloud-init') }
     let(:user_data_template) do
-      FactoryGirl.create(
+      FactoryBot.create(
         :provisioning_template,
         :template_kind => user_data_template_kind,
         :template => user_data_content,
@@ -18,7 +18,7 @@ class UserdataControllerTest < ActionController::TestCase
       )
     end
     let(:cloud_init_template) do
-      FactoryGirl.create(
+      FactoryBot.create(
         :provisioning_template,
         :template_kind => cloud_init_template_kind,
         :template => cloud_init_content,
@@ -27,7 +27,7 @@ class UserdataControllerTest < ActionController::TestCase
       )
     end
     let(:os) do
-      FactoryGirl.create(
+      FactoryBot.create(
         :operatingsystem,
         :with_associations,
         :family => 'Redhat',
@@ -38,7 +38,7 @@ class UserdataControllerTest < ActionController::TestCase
       )
     end
     let(:host) do
-      FactoryGirl.create(
+      FactoryBot.create(
         :host,
         :managed,
         :operatingsystem => os,
@@ -48,7 +48,7 @@ class UserdataControllerTest < ActionController::TestCase
     end
 
     setup do
-      FactoryGirl.create(
+      FactoryBot.create(
         :os_default_template,
         :template_kind => user_data_template_kind,
         :provisioning_template => user_data_template,
@@ -67,7 +67,7 @@ class UserdataControllerTest < ActionController::TestCase
 
     context 'with cloud-init template' do
       setup do
-        FactoryGirl.create(
+        FactoryBot.create(
           :os_default_template,
           :template_kind => cloud_init_template_kind,
           :provisioning_template => cloud_init_template,
@@ -84,7 +84,7 @@ class UserdataControllerTest < ActionController::TestCase
   end
 
   context '#metadata' do
-    let(:host) { FactoryGirl.create(:host, :managed) }
+    let(:host) { FactoryBot.create(:host, :managed) }
     setup do
       @request.env['REMOTE_ADDR'] = host.ip
     end
