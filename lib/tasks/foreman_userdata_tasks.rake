@@ -29,7 +29,7 @@ namespace :foreman_userdata do
                          "#{ForemanUserdata::Engine.root}/lib/**/*.rb",
                          "#{ForemanUserdata::Engine.root}/test/**/*.rb"]
       end
-    rescue
+    rescue LoadError
       puts 'Rubocop not loaded.'
     end
 

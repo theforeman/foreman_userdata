@@ -1,3 +1,8 @@
+AllCops:
+  TargetRubyVersion: 2.2
+  Exclude:
+    - 'Rakefile'
+
 Rails:
   Enabled: true
 
@@ -32,3 +37,9 @@ Metrics/BlockLength:
 
 Metrics/LineLength:
   Max: 120
+
+Style/SymbolArray:
+  Enabled: false
+
+Style/FormatStringToken:
+  Enabled: false

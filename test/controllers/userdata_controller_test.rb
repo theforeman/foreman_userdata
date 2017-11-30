@@ -93,7 +93,7 @@ class UserdataControllerTest < ActionController::TestCase
       get :metadata
       assert_response :success
       response = @response.body
-      parsed = YAML.load(response)
+      parsed = YAML.safe_load(response)
       assert_equal host.mac, parsed['mac']
       assert_equal host.hostname, parsed['hostname']
     end
