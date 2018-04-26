@@ -1,4 +1,4 @@
-require File.expand_path('../lib/foreman_userdata/version', __FILE__)
+require File.expand_path('lib/foreman_userdata/version', __dir__)
 require 'date'
 
 Gem::Specification.new do |s|
@@ -19,5 +19,5 @@ Gem::Specification.new do |s|
   s.test_files = Dir['test/**/*']
 
   s.add_development_dependency 'rdoc'
-  s.add_development_dependency 'rubocop', '0.51.0'
+  s.add_development_dependency 'rubocop', '0.54.0'
 end

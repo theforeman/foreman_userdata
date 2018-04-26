@@ -60,7 +60,7 @@ class UserdataController < ApplicationController
       :error => error.message,
       :status => :internal_server_error
     )
-    return false
+    false
   end
 
   def skip_secure_headers
