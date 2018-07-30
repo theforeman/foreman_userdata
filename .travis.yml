@@ -29,3 +29,4 @@ env:
     - FOREMAN_CORE_BRANCH=1.17-stable
     - FOREMAN_CORE_BRANCH=1.18-stable
     - FOREMAN_CORE_BRANCH=1.19-stable
+    - FOREMAN_CORE_BRANCH=develop

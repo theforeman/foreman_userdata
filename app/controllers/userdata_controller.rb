@@ -51,7 +51,12 @@ class UserdataController < ApplicationController
   end
 
   def safe_render(template)
-    @host.render_template(template)
+    # Foreman >= 1.20
+    if template.respond_to?(:render)
+      template.render(host: @host, params: params)
+    else
+      @host.render_template(template)
+    end
   rescue StandardError => error
     Foreman::Logging.exception("Error rendering the #{template.name} template", error)
     render_error(
