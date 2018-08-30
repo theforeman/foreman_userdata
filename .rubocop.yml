@@ -37,10 +37,14 @@ Metrics/BlockLength:
     - 'test/**/*'
 
 Metrics/LineLength:
-  Max: 120
+  Max: 180
 
 Style/SymbolArray:
   Enabled: false
 
 Style/FormatStringToken:
   Enabled: false
+
+Naming/FileName:
+  Exclude:
+    - 'db/seeds.d/**/*'
