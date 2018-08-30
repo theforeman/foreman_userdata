@@ -19,15 +19,15 @@ You need to install the package `tfm-rubygem-foreman_userdata`.
 This plug-in was developed to be used with VMWare vSphere provisioning from VMWare templates.
 vSphere offers the functionality to customize the templates during cloning. This is very handy for changing the network settings of a newly cloned VM.
 Foreman fully supports this feature via a userdata template. [The Foreman handbook](https://theforeman.org/manuals/1.17/index.html#image-provisioning-without-ssh) has details on how to configure this.
-An example template for a Linux host can be found in a [gist](https://gist.github.com/timogoebel/959deecff4f8ca8bcdd5fc9f95cbc8e3).
 The amount of things vSphere allows a user to customize are very limited, though. It's not possible to run a finish script or setup puppet with valid certificates on the new VM.
 This can be worked around by setting up a two step process: vSphere customization is just used to set up the network config of the host. Cloud-init is used to do the rest of the customization on first boot.
+Templates for Linux hosts are seeded when you install this plugin. Make sure you associate both `CloudInit default` and `UserData open-vm-tools` templates with the operatingsystem of your host and choose them as the default `userdata` and `cloud-init` templates.
 
 This leads to this workflow:
-1. An administrator creates a vSphere VM template and sets up cloud-init as described below.
-2. Foreman creates a new cloned VM in vSphere and passes the [userdata template](https://gist.github.com/timogoebel/959deecff4f8ca8bcdd5fc9f95cbc8e3#file-userdata-template-erb) to vSphere.
+1. An administrator creates a vSphere VM template and makes sure the cloud-init application is installed in the template VM as described below in the client setup section.
+2. Foreman creates a new cloned VM in vSphere and passes the userdata template (UserData open-vm-tools) to vSphere if the template is properly assigned to the host.
 3. vSphere changes the network settings of the new host as defined in the userdata template and boots the new VM.
-4. The VM runs cloud-init and asks Foreman for the [cloud-init template](https://gist.github.com/timogoebel/959deecff4f8ca8bcdd5fc9f95cbc8e3#file-cloud-init-template-erb). Your VM needs network access to Foreman on ports `tcp/80` and `tcp/443`. Cloud-init then runs the template and executes the defined actions.
+4. The VM runs cloud-init and asks Foreman for the cloud-init template (CloudInit default) if the template has been properly assinged to the host. Your VM needs network access to Foreman on ports `tcp/80` and `tcp/443`. Cloud-init then runs the template and executes the defined actions.
 5. Cloud-init signals Foreman that the host has been built successfully.
 
 ## Client setup

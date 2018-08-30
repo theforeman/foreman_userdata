@@ -101,9 +101,7 @@ class UserdataController < ApplicationController
     ip = request.env['REMOTE_ADDR']
 
     # check if someone is asking on behalf of another system (load balancer etc)
-    if request.env['HTTP_X_FORWARDED_FOR'].present? && (ip =~ Regexp.new(Setting[:remote_addr]))
-      ip = request.env['HTTP_X_FORWARDED_FOR']
-    end
+    ip = request.env['HTTP_X_FORWARDED_FOR'] if request.env['HTTP_X_FORWARDED_FOR'].present? && (ip =~ Regexp.new(Setting[:remote_addr]))
 
     ip
   end
