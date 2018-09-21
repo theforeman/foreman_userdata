@@ -26,11 +26,13 @@ Templates for Linux hosts are seeded when you install this plugin. Make sure you
 This leads to this workflow:
 1. An administrator creates a vSphere VM template and makes sure the cloud-init application is installed in the template VM as described below in the client setup section.
 2. Foreman creates a new cloned VM in vSphere and passes the userdata template (UserData open-vm-tools) to vSphere if the template is properly assigned to the host.
-3. vSphere changes the network settings of the new host as defined in the userdata template and boots the new VM.
-4. The VM runs cloud-init and asks Foreman for the cloud-init template (CloudInit default) if the template has been properly assinged to the host. Your VM needs network access to Foreman on ports `tcp/80` and `tcp/443`. Cloud-init then runs the template and executes the defined actions.
+3. vSphere changes the network settings of the new host to a static ip configuration as defined in the userdata template and boots the new VM.
+4. The VM runs cloud-init and asks Foreman for the cloud-init template (CloudInit default). Foreman can identify the host via the request IP address and render the cloud-init template if it has been properly assinged to the host.
 5. Cloud-init signals Foreman that the host has been built successfully.
 
-## Client setup
+## Client setup and prerequisites
+
+You need to make sure cloud-init is installed on the client that will contact Foreman.
 
 On RHEL7 using cloud-init from EPEL:
 
@@ -44,6 +46,8 @@ datasource:
     seedfrom: http://foreman.example.com/userdata/
 EOF
 ```
+
+Your VM needs network access to Foreman on ports `tcp/80` and `tcp/443`. Cloud-init then runs the template and executes the defined actions.
 
 ## Client debug
 
