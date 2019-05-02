@@ -1,5 +1,7 @@
 # ForemanUserdata
 
+**This plugin has been discontinued. It works fine for Foreman < 1.23 and will still be maintained. Starting with Foreman 1.23 it is part of Foreman core.**
+
 This plug-in adds a user-data endpoint to [The Foreman](https://theforeman.org/) for usage with cloud-init.
 
 ## Compatibility
@@ -7,6 +9,7 @@ This plug-in adds a user-data endpoint to [The Foreman](https://theforeman.org/)
 | Foreman Version | Plugin Version |
 | --------------- | -------------- |
 | >= 1.12         | any            |
+| >= 1.23         | included in core |
 
 ## Installation
 
